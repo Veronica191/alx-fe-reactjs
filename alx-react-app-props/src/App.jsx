@@ -6,8 +6,9 @@ import WelcomeMessage from './components/WelcomeMessage'
 import Header from './components/Header'
 import MainContent from './components/MainContent'
 import Footer from './components/Footer'
-import UserProfile from './components/UserProfile'
+import UserProfile from './components/ProfilePage'
 import UserContext from "./UserContext"
+import ProfilePage from './components/ProfilePage'
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
         <MainContent />
         <Footer />
         {/* ❌ Remove props – Now Context will supply them */}
-        <UserProfile />
+        <ProfilePage />
       </>
     </UserContext.Provider>
   )
