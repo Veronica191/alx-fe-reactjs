@@ -9,6 +9,7 @@ import Contact from "./components/Contact";
 
 function App() {
   return (
+    <div style={{ fontFamily: "Arial, sans-serif", backgroundColor: "#f8f8f8", minHeight: "100vh" }}>
     <Router>
       {/* Navigation bar appears on all pages */}
       <Navbar />
@@ -24,6 +25,7 @@ function App() {
       {/* Footer appears on all pages */}
       <Footer />
     </Router>
+    </div>
   );
 }
 
