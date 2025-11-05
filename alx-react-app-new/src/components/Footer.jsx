@@ -5,12 +5,12 @@ function Footer() {
         border: "1px solid gray",
         padding: "10px",
         margin: "10px",
-        backgroundColor: "#eee",
+        backgroundColor: "#e6e6e6",
         textAlign: "center"
       }}
     >
-      <p style={{ color: "purple", fontWeight: "bold" }}>
-        © 2025 My React App. All Rights Reserved.
+      <p style={{ color: "blue", fontWeight: "bold" }}>
+        © 2023 City Lovers
       </p>
     </footer>
   );

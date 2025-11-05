@@ -8,10 +8,8 @@ function MainContent() {
         backgroundColor: "#f9f9f9"
       }}
     >
-      <h2 style={{ color: "green" }}>Main Content</h2>
-      <p>
-        This is the main content section of the app. It contains useful
-        information to help users understand how the app works.
+      <p style={{ color: "green", fontSize: "16px" }}>
+        I love to visit New York, Paris, and Tokyo.
       </p>
     </main>
   );
