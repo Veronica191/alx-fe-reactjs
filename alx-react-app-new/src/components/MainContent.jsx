@@ -2,16 +2,16 @@ function MainContent() {
   return (
     <main
       style={{
-        backgroundColor: "#f0f8ff",
-        padding: "20px",
-        margin: "15px",
-        borderRadius: "8px",
-        border: "1px solid lightgray"
+        border: "1px solid gray",
+        padding: "10px",
+        margin: "10px",
+        backgroundColor: "#f9f9f9"
       }}
     >
-      <h2 style={{ color: "darkgreen", textAlign: "center" }}>Main Content</h2>
-      <p style={{ fontSize: "16px", lineHeight: "1.5" }}>
-        Welcome to my React application! Here, you will learn about different React components and how to style them.
+      <h2 style={{ color: "green" }}>Main Content</h2>
+      <p>
+        This is the main content section of the app. It contains useful
+        information to help users understand how the app works.
       </p>
     </main>
   );
