@@ -7,8 +7,8 @@ const EditRecipeForm = ({ recipe }) => {
 
   const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+  event.preventDefault();
 
     // update the recipe
     updateRecipe(recipe.id, { title, description });
