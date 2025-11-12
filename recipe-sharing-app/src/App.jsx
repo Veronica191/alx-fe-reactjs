@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useRecipeStore } from "./components/recipeStore";
 import RecipeDetails from "./components/RecipeDetails";
 import SearchBar from "./components/SearchBar"; // import the SearchBar
+import AddRecipeForm from "./components/AddRecipeForm";
 
 function App() {
   const recipes = useRecipeStore((state) => state.recipes);
