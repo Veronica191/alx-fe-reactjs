@@ -1,3 +1,4 @@
+// src/components/recipeStore.jsx
 import { create } from 'zustand';
 
 export const useRecipeStore = create((set) => ({
@@ -6,21 +7,26 @@ export const useRecipeStore = create((set) => ({
     { id: 2, title: "Jollof Rice", description: "Tasty and spicy West African dish" },
   ],
 
-  // Add a new recipe
+  // Search and Filtering
+  searchTerm: '',
+  filteredRecipes: [],
+
+  setSearchTerm: (term) => set((state) => {
+    const filtered = state.recipes.filter(recipe =>
+      recipe.title.toLowerCase().includes(term.toLowerCase())
+    );
+    return { searchTerm: term, filteredRecipes: filtered };
+  }),
+
+  // Recipe actions
   addRecipe: (newRecipe) =>
     set((state) => ({ recipes: [...state.recipes, newRecipe] })),
 
-  // Delete a recipe by ID
   deleteRecipe: (id) =>
-    set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
+    set((state) => ({ recipes: state.recipes.filter(r => r.id !== id) })),
 
-  // Update a recipe
   updateRecipe: (updatedRecipe) =>
     set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
-      ),
+      recipes: state.recipes.map(r => r.id === updatedRecipe.id ? updatedRecipe : r)
     })),
 }));
