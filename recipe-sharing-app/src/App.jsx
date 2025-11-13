@@ -1,15 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from "react-router-dom";
 import { useRecipeStore } from "./components/recipeStore";
 import RecipeDetails from "./components/RecipeDetails";
-import SearchBar from "./components/SearchBar"; // import the SearchBar
+import SearchBar from "./components/SearchBar";
 import AddRecipeForm from "./components/AddRecipeForm";
+import FavoritesList from "./components/FavoritesList";
+import RecommendationsList from "./components/RecommendationsList";
 
 function App() {
   const recipes = useRecipeStore((state) => state.recipes);
   const searchTerm = useRecipeStore((state) => state.searchTerm);
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
 
-  // decide which recipes to show: filtered or all
+  // Decide which recipes to show: filtered or all
   const displayedRecipes = searchTerm ? filteredRecipes : recipes;
 
   return (
@@ -18,30 +20,45 @@ function App() {
         <h1>Recipe Sharing App 🍲</h1>
 
         <Routes>
+          {/* Home Page */}
           <Route
             path="/"
             element={
               <div>
-                <h2>All Recipes</h2>
+                {/* Add a new recipe */}
+                <h2>Add a New Recipe</h2>
+                <AddRecipeForm />
 
-                {/* Step 2: SearchBar placed here */}
+                {/* Search bar */}
+                <h2>Search Recipes</h2>
                 <SearchBar />
 
-                {/* Display recipes (filtered if search term exists) */}
-                {displayedRecipes.map((recipe) => (
-                  <div key={recipe.id} style={{ marginBottom: "10px" }}>
-                    <h3>{recipe.title}</h3>
-                    <p>{recipe.description}</p>
-                    <Link to={`/recipes/${recipe.id}`}>View Details</Link>
-                  </div>
-                ))}
+                {/* Recipe list */}
+                <h2>All Recipes</h2>
+                {displayedRecipes.length === 0 ? (
+                  <p>No recipes found.</p>
+                ) : (
+                  displayedRecipes.map((recipe) => (
+                    <div key={recipe.id} style={{ marginBottom: "10px" }}>
+                      <h3>{recipe.title}</h3>
+                      <p>{recipe.description}</p>
+                      <Link to={`/recipes/${recipe.id}`}>View Details</Link>
+                    </div>
+                  ))
+                )}
 
-                {/* Message if no recipes found */}
-                {displayedRecipes.length === 0 && <p>No recipes found.</p>}
+                {/* Favorites */}
+                <h2>My Favorites</h2>
+                <FavoritesList />
+
+                {/* Recommendations */}
+                <h2>Recommended Recipes</h2>
+                <RecommendationsList />
               </div>
             }
           />
 
+          {/* Recipe details page */}
           <Route path="/recipes/:id" element={<RecipeDetailsWrapper />} />
         </Routes>
       </div>
@@ -49,11 +66,10 @@ function App() {
   );
 }
 
-// Wrapper to extract recipe ID from URL
-import { useParams } from "react-router-dom";
+// Wrapper to extract recipe ID from URL and pass it as a number
 const RecipeDetailsWrapper = () => {
   const { id } = useParams();
-  return <RecipeDetails recipeId={id} />;
+  return <RecipeDetails recipeId={parseInt(id)} />;
 };
 
 export default App;
