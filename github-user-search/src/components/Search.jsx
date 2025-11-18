@@ -1,4 +1,3 @@
-// src/components/Search.jsx
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 import UserCard from "./UserCard";
@@ -25,7 +24,6 @@ export default function Search() {
       const data = await fetchUserData(username);
       setUser(data);
     } catch (err) {
-      // If GitHub returns 404 or any other error, show the message requested
       console.error("fetch error", err);
       setError("Looks like we cant find the user");
     } finally {
@@ -51,7 +49,14 @@ export default function Search() {
       <div style={{ marginTop: 16 }}>
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        {user && <UserCard user={user} />}
+        {user && (
+          <UserCard
+            avatar_url={user.avatar_url}
+            login={user.login}
+            html_url={user.html_url}
+            id={user.id}
+          />
+        )}
       </div>
     </div>
   );
