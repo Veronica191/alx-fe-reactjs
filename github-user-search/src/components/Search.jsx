@@ -1,42 +1,58 @@
+// src/components/Search.jsx
 import React, { useState } from "react";
-import { searchUsers } from "../services/github";
+import { fetchUserData } from "../services/githubService";
+import UserCard from "./UserCard";
 
-export default function Search({ setUsers, setLoading, setError }) {
+export default function Search() {
   const [query, setQuery] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!query.trim()) {
-      setError("Please enter a username to search.");
+    setUser(null);
+
+    const username = query.trim();
+    if (!username) {
+      setError("Please enter a username");
       return;
     }
 
     try {
       setLoading(true);
-      const results = await searchUsers(query.trim());
-      setUsers(results);
+      const data = await fetchUserData(username);
+      setUser(data);
     } catch (err) {
-      console.error(err);
-      setError("Failed to fetch users. Try again later.");
-      setUsers([]);
+      // If GitHub returns 404 or any other error, show the message requested
+      console.error("fetch error", err);
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8 }}>
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search GitHub users (e.g. torvalds)"
-        aria-label="Search"
-        style={{ flex: 1, padding: 8 }}
-      />
-      <button type="submit" style={{ padding: "8px 12px" }}>
-        Search
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8 }}>
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter GitHub username (e.g. torvalds)"
+          aria-label="GitHub username"
+          style={{ flex: 1, padding: 8 }}
+        />
+        <button type="submit" style={{ padding: "8px 12px" }}>
+          Search
+        </button>
+      </form>
+
+      <div style={{ marginTop: 16 }}>
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {user && <UserCard user={user} />}
+      </div>
+    </div>
   );
 }
