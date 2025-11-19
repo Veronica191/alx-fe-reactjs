@@ -5,12 +5,16 @@ import About from "./components/About";
 
 export default function App() {
   return (
-    <div className="app-container" style={{ padding: 20, fontFamily: "system-ui" }}>
-      <header style={{ marginBottom: 20 }}>
-        <h1>GitHub User Search</h1>
+    <div className="app-container p-5 font-sans">
+      <header className="mb-5">
+        <h1 className="text-3xl font-bold mb-2">GitHub User Search</h1>
         <nav>
-          <Link to="/" style={{ marginRight: 10 }}>Home</Link>
-          <Link to="/about">About</Link>
+          <Link to="/" className="mr-4 text-blue-600 hover:underline">
+            Home
+          </Link>
+          <Link to="/about" className="text-blue-600 hover:underline">
+            About
+          </Link>
         </nav>
       </header>
 
