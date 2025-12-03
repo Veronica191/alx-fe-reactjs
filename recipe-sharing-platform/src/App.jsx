@@ -1,38 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './index.css'
-import './App.css'
-import HomePage from './components/HomePage.jsx';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage.jsx";
+import RecipeDetail from './components/RecipeDetail.jsx'; // Make sure to include .jsx
+import './index.css';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <Router>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {/* Testing Tailwind */}
+        <h1 className="text-blue-500 text-3xl font-bold p-4">
+          Tailwind is working
+        </h1>
+
+        <Routes>
+          {/* Home route */}
+          <Route path="/" element={<HomePage />} />
+          {/* Recipe Detail route */}
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
+        </Routes>
       </div>
-      <h1 className="text-blue-500">Tailwind is working</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <HomePage />
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

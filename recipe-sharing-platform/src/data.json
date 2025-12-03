@@ -3,18 +3,66 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta or bacon",
+      "2 large eggs",
+      "50g pecorino cheese, grated",
+      "Salt and black pepper"
+    ],
+    "steps": [
+      "Cook spaghetti in salted boiling water until al dente.",
+      "Fry pancetta until crispy, then remove from heat.",
+      "Whisk eggs and pecorino in a bowl.",
+      "Drain spaghetti and toss with pancetta and egg-cheese mix off the heat.",
+      "Season with black pepper and serve immediately."
+    ] 
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "500g chicken breast, cubed",
+      "150g yogurt",
+      "2 tbsp tikka masala spice",
+      "1 onion, chopped",
+      "400g canned tomatoes",
+      "200ml cream"
+    ],
+    "steps": [
+      "Marinate chicken in yogurt and tikka spice for 1 hour.",
+      "Grill or pan-fry chicken until cooked and slightly charred.",
+      "Sauté onion, add tomatoes and simmer to make sauce.",
+      "Stir in cream and add cooked chicken to the sauce.",
+      "Simmer 5 minutes, garnish with cilantro and serve with rice."
+    ]
   },
   {
     "id": 3,
     "title": "Beef Stroganoff",
     "summary": "Tender strips of beef in a creamy mushroom sauce served over noodles.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": [
+      "400g beef sirloin, sliced into thin strips",
+      "200g mushrooms, sliced",
+      "1 onion, chopped",
+      "2 cloves garlic, minced",
+      "200ml sour cream",
+      "2 tbsp flour",
+      "2 tbsp butter",
+      "Salt and pepper"
+    ],
+    "steps": [
+      "Season the beef strips and brown them in a hot pan, then set aside.",
+      "Sauté onions and garlic in butter until soft.",
+      "Add mushrooms and cook until tender.",
+      "Sprinkle flour and stir to form a roux.",
+      "Add sour cream and simmer to form a thick sauce.",
+      "Return the beef to the pan and simmer for 5 minutes.",
+      "Serve over cooked noodles or rice."
+    ]
   }
 ]
