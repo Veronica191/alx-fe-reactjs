@@ -12,16 +12,14 @@ export default function AddRecipeForm() {
     e.preventDefault();
 
     // Validation
-    const newErrors = {};
-    if (!title.trim()) newErrors.title = "Title is required";
-    if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
-    if (!instructions.trim()) newErrors.instructions = "Instructions are required";
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
+    const validate = () => {
+  const newErrors = {};
+  if (!title.trim()) newErrors.title = "Title is required";
+  if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
+  if (!instructions.trim()) newErrors.instructions = "Instructions are required";
+  return newErrors;
+};
+    
     // Create recipe object
     const newRecipe = {
       id: Date.now(),
