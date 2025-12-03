@@ -27,7 +27,7 @@ export default function AddRecipeForm() {
       id: Date.now(),
       title,
       ingredients: ingredients.split("\n"), // Split textarea lines
-      instructions: instructions.split("\n"),
+      instructions: steps.split("\n"),
     };
 
     console.log("New Recipe Submitted:", newRecipe);
