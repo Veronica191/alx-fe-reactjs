@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
-import RecipeDetail from './components/RecipeDetail.jsx'; // Make sure to include .jsx
+import RecipeDetail from "./components/RecipeDetail.jsx";
+import AddRecipeForm from "./components/AddRecipeForm.jsx";
 import './index.css';
 import './App.css';
 
@@ -16,8 +17,12 @@ function App() {
         <Routes>
           {/* Home route */}
           <Route path="/" element={<HomePage />} />
+
           {/* Recipe Detail route */}
           <Route path="/recipe/:id" element={<RecipeDetail />} />
+
+          {/* Add Recipe Form route */}
+          <Route path="/add-recipe" element={<AddRecipeForm />} />
         </Routes>
       </div>
     </Router>
