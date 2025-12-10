@@ -1,5 +1,11 @@
 import { useQuery, useQueryClient } from "react-query";
 
+// Define the fetch function separately
+const fetchPosts = async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return response.json();
+};
+
 function PostsComponent() {
   const queryClient = useQueryClient();
 
@@ -10,17 +16,10 @@ function PostsComponent() {
     error,
     isFetching,
     refetch,
-  } = useQuery(
-    "posts",
-    async () => {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-      return response.json();
-    },
-    {
-      staleTime: 10000, // data stays fresh for 10 seconds
-      cacheTime: 300000, // data stays in cache for 5 minutes
-    }
-  );
+  } = useQuery("posts", fetchPosts, {
+    staleTime: 10000, // data stays fresh for 10 seconds
+    cacheTime: 300000, // data stays in cache for 5 minutes
+  });
 
   if (isLoading) {
     return <h3>Loading posts...</h3>;
@@ -38,18 +37,14 @@ function PostsComponent() {
       <button onClick={() => refetch()}>Refetch Posts</button>
 
       <button
-        onClick={() => {
-          queryClient.invalidateQueries("posts");
-        }}
+        onClick={() => queryClient.invalidateQueries("posts")}
         style={{ marginLeft: "10px" }}
       >
         Invalidate Cache
       </button>
 
       <button
-        onClick={() => {
-          queryClient.removeQueries("posts");
-        }}
+        onClick={() => queryClient.removeQueries("posts")}
         style={{ marginLeft: "10px" }}
       >
         Remove Cache
