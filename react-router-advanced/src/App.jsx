@@ -30,7 +30,7 @@ function App() {
         <Route
           path="/profile/*"
           element={
-            <ProtectedRoute isAuth={isAuth}>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
