@@ -19,6 +19,8 @@ function PostsComponent() {
   } = useQuery("posts", fetchPosts, {
     staleTime: 10000, // data stays fresh for 10 seconds
     cacheTime: 300000, // data stays in cache for 5 minutes
+    refetchOnWindowFocus: false, // prevents auto refetch on window focus
+    keepPreviousData: true, //  keeps previous data while fetching new data
   });
 
   if (isLoading) {
