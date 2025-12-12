@@ -1,91 +1,48 @@
-// src/components/TodoList.jsx
-import React, { useState } from "react";
+import React, { useState } from 'react'
+import AddTodoForm from './AddTodoForm'
 
-/**
- * Simple AddTodoForm embedded as inner component for clarity.
- * - Exposes input with data-testid="todo-input"
- * - Submit button with data-testid="add-button"
- */
-function AddTodoForm({ onAdd }) {
-  const [text, setText] = useState("");
-  const submit = (e) => {
-    e.preventDefault();
-    if (!text.trim()) return;
-    onAdd(text.trim());
-    setText("");
-  };
-  return (
-    <form onSubmit={submit}>
-      <input
-        data-testid="todo-input"
-        placeholder="Add todo..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button type="submit" data-testid="add-button">Add</button>
-    </form>
-  );
-}
+let nextId = 3
 
-export default function TodoList() {
+export default function TodoList(){
   const [todos, setTodos] = useState([
-    { id: 1, text: "Learn React", completed: false },
-    { id: 2, text: "Write tests", completed: false },
-    { id: 3, text: "Ship app", completed: false }
-  ]);
+    { id: 1, text: 'Learn React', completed: false },
+    { id: 2, text: 'Build a Todo app', completed: true }
+  ])
 
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos((prev) => [newTodo, ...prev]);
-  };
+  const addTodo = (text) =>{
+    const newTodo = { id: nextId++, text, completed: false }
+    setTodos((t)=>[...t, newTodo])
+  }
 
-  const toggleTodo = (id) => {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
-  };
+  const toggleTodo = (id) =>{
+    setTodos((t)=>t.map(todo => todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+  }
 
-  const deleteTodo = (id) => {
-    setTodos((prev) => prev.filter((t) => t.id !== id));
-  };
+  const deleteTodo = (id) =>{
+    setTodos((t)=>t.filter(todo => todo.id !== id))
+  }
 
   return (
     <div>
-      <h2>Todo List</h2>
       <AddTodoForm onAdd={addTodo} />
 
-      <ul data-testid="todo-list">
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              marginBottom: "8px"
-            }}
-          >
+      <ul aria-label="todo-list">
+        {todos.map(todo => (
+          <li key={todo.id}>
             <span
+              role="button"
+              tabIndex={0}
+              onClick={()=>toggleTodo(todo.id)}
+              onKeyDown={(e)=>{ if (e.key === 'Enter') toggleTodo(todo.id) }}
+              style={{ cursor:'pointer', textDecoration: todo.completed ? 'line-through' : 'none' }}
               data-testid={`todo-text-${todo.id}`}
-              onClick={() => toggleTodo(todo.id)}
-              style={{
-                textDecoration: todo.completed ? "line-through" : "none",
-                cursor: "pointer",
-                flex: 1
-              }}
             >
               {todo.text}
             </span>
-
-            <button
-              data-testid={`delete-button-${todo.id}`}
-              onClick={() => deleteTodo(todo.id)}
-            >
-              Delete
-            </button>
+            <button aria-label={`delete-${todo.id}`} onClick={()=>deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
     </div>
-  );
+  )
 }
