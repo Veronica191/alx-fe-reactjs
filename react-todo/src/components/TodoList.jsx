@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AddTodoForm from './components/AddTodoForm'
+import AddTodoForm from './AddTodoForm'
 
 let nextId = 3
 
